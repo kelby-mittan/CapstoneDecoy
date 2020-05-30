@@ -14,6 +14,8 @@ class LocationDetailVC: UIViewController {
     
     private var waveV = Wave()
     
+    private let locations = FactsData.getLocations()
+    
     var isStatusBarHidden = false
     
     private let headerViewMaxHeight: CGFloat = 250
@@ -41,7 +43,7 @@ class LocationDetailVC: UIViewController {
         locationView.goToARButton.addTarget(self, action: #selector(goToARButtonPressed(_:)), for: .touchUpInside)
         locationView.scrollView.delegate = self
         
-        print(locationView.seaLevelFactsLabel)
+        dump(locations)
     }
     
     override func viewWillAppear(_ animated: Bool) {
