@@ -12,6 +12,8 @@ class LocationDetailVC: UIViewController {
     
     private var locationView = DetailView()
     
+    private var waveV = Wave()
+    
     var isStatusBarHidden = false
     
     private let headerViewMaxHeight: CGFloat = 250
@@ -25,7 +27,7 @@ class LocationDetailVC: UIViewController {
     }
     
     override func loadView() {
-        view = locationView
+        view = waveV
     }
     
     override func viewDidLoad() {
