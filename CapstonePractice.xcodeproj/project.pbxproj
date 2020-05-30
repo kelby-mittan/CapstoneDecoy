@@ -10,6 +10,7 @@
 		028585692481A0240003E31A /* StickyHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028585682481A0240003E31A /* StickyHeaderController.swift */; };
 		0285856B2481D5480003E31A /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0285856A2481D5480003E31A /* DetailView.swift */; };
 		0285856D2481E0E30003E31A /* WavyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0285856C2481E0E30003E31A /* WavyView.swift */; };
+		028585742482E0720003E31A /* locationFactsData.json in Resources */ = {isa = PBXBuildFile; fileRef = 028585732482E0720003E31A /* locationFactsData.json */; };
 		02ECF51C247AF2E90008915E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ECF51B247AF2E90008915E /* AppDelegate.swift */; };
 		02ECF51E247AF2EA0008915E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ECF51D247AF2EA0008915E /* SceneDelegate.swift */; };
 		02ECF525247AF2F20008915E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02ECF524247AF2F20008915E /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		028585682481A0240003E31A /* StickyHeaderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeaderController.swift; sourceTree = "<group>"; };
 		0285856A2481D5480003E31A /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		0285856C2481E0E30003E31A /* WavyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WavyView.swift; sourceTree = "<group>"; };
+		028585732482E0720003E31A /* locationFactsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = locationFactsData.json; sourceTree = SOURCE_ROOT; };
 		02ECF518247AF2E90008915E /* CapstonePractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstonePractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02ECF51B247AF2E90008915E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02ECF51D247AF2EA0008915E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 			path = "Views + Controllers";
 			sourceTree = "<group>";
 		};
+		028585702482DBC80003E31A /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				028585732482E0720003E31A /* locationFactsData.json */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
 		02ECF50F247AF2E90008915E = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +130,7 @@
 		02ECF51A247AF2E90008915E /* CapstonePractice */ = {
 			isa = PBXGroup;
 			children = (
+				028585702482DBC80003E31A /* JSON */,
 				0285856E2482D4B50003E31A /* Supporting Files */,
 				0285856F2482D4F10003E31A /* Views + Controllers */,
 				02ECF529247AF2F20008915E /* Info.plist */,
@@ -240,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				028585742482E0720003E31A /* locationFactsData.json in Resources */,
 				02ECF528247AF2F20008915E /* LaunchScreen.storyboard in Resources */,
 				02ECF525247AF2F20008915E /* Assets.xcassets in Resources */,
 			);
