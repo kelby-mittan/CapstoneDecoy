@@ -29,7 +29,7 @@ class LocationDetailVC: UIViewController {
     }
     
     override func loadView() {
-        view = waveV
+        view = locationView
     }
     
     override func viewDidLoad() {
@@ -43,7 +43,6 @@ class LocationDetailVC: UIViewController {
         locationView.goToARButton.addTarget(self, action: #selector(goToARButtonPressed(_:)), for: .touchUpInside)
         locationView.scrollView.delegate = self
         
-        dump(locations)
     }
     
     override func viewWillAppear(_ animated: Bool) {

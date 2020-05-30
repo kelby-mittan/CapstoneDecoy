@@ -16,10 +16,10 @@ struct Locations: Decodable {
     let location: String
     let facts: Facts
     let dataSet: [LocationData]
-    
 }
 
 struct Facts: Decodable {
+    let generalFacts: String
     let seaLevelFacts: String
     let populationFacts: String
 }
