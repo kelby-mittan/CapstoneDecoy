@@ -19,7 +19,9 @@ class WavyView: UIView {
 
     override func draw(_ rect: CGRect) {
         // Fill the whole background with the darkest blue color
-        UIColor(red: 0.329, green: 0.218, blue: 0.875, alpha: 1).set()
+        let white: UIColor = .secondarySystemBackground
+        white.set()
+//        UIColor(red: 0.329, green: 0.218, blue: 0.875, alpha: 1).set()
         let bg = UIBezierPath(rect: rect)
         bg.fill()
 
@@ -87,21 +89,21 @@ class WavyView: UIView {
 }
 
 // This creates the view with the same size as the image posted in the question
-let wavyV = WavyView(frame: CGRect(x: 0, y: 0, width: 502, height: 172))
+//let wavyV = WavyView(frame: CGRect(x: 0, y: 0, width: 502, height: 172))
 
 
 class Wave: UIView {
     
     
     public lazy var wView: WavyView = {
-        let wavy = WavyView(frame: CGRect(x: 0, y: 0, width: 502, height: 172))
-        wavy.backgroundColor = .red
+        let wavy = WavyView()
+//        wavy.backgroundColor = .red
         return wavy
     }()
     
     public lazy var wImageView: WavyImageView = {
         let wavy = WavyImageView(frame: CGRect(x: 0, y: 0, width: 502, height: 172))
-        wavy.backgroundColor = .red
+//        wavy.backgroundColor = .red
 //        wavy.image = UIImage(named: "nycSeaLevel1")
         
         return wavy
@@ -211,7 +213,10 @@ class WavyImageView: UIImageView {
 
     override func draw(_ rect: CGRect) {
         // Fill the whole background with the darkest blue color
-        UIColor(red: 0.329, green: 0.218, blue: 0.875, alpha: 1).set()
+        let white: UIColor = .secondarySystemBackground
+        white.set()
+//        let image = UIImage(named: "nycSeaLevel1")
+//        UIColor(red: 0.329, green: 0.218, blue: 0.875, alpha: 1).set()
         let bg = UIBezierPath(rect: rect)
         bg.fill()
         

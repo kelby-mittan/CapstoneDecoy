@@ -74,6 +74,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0285856E2482D4B50003E31A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				02ECF51B247AF2E90008915E /* AppDelegate.swift */,
+				02ECF51D247AF2EA0008915E /* SceneDelegate.swift */,
+				02ECF524247AF2F20008915E /* Assets.xcassets */,
+				02ECF526247AF2F20008915E /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0285856F2482D4F10003E31A /* Views + Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				02ECF53D247AF4100008915E /* LocationDetailVC.swift */,
+				028585682481A0240003E31A /* StickyHeaderController.swift */,
+				02ECF53F247AF7140008915E /* LocationView.swift */,
+				0285856A2481D5480003E31A /* DetailView.swift */,
+				0285856C2481E0E30003E31A /* WavyView.swift */,
+			);
+			path = "Views + Controllers";
+			sourceTree = "<group>";
+		};
 		02ECF50F247AF2E90008915E = {
 			isa = PBXGroup;
 			children = (
@@ -97,15 +120,8 @@
 		02ECF51A247AF2E90008915E /* CapstonePractice */ = {
 			isa = PBXGroup;
 			children = (
-				02ECF51B247AF2E90008915E /* AppDelegate.swift */,
-				02ECF51D247AF2EA0008915E /* SceneDelegate.swift */,
-				02ECF53D247AF4100008915E /* LocationDetailVC.swift */,
-				028585682481A0240003E31A /* StickyHeaderController.swift */,
-				02ECF53F247AF7140008915E /* LocationView.swift */,
-				0285856A2481D5480003E31A /* DetailView.swift */,
-				0285856C2481E0E30003E31A /* WavyView.swift */,
-				02ECF524247AF2F20008915E /* Assets.xcassets */,
-				02ECF526247AF2F20008915E /* LaunchScreen.storyboard */,
+				0285856E2482D4B50003E31A /* Supporting Files */,
+				0285856F2482D4F10003E31A /* Views + Controllers */,
 				02ECF529247AF2F20008915E /* Info.plist */,
 			);
 			path = CapstonePractice;
