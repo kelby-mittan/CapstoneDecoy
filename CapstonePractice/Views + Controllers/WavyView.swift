@@ -27,7 +27,7 @@ class WavyView: UIView {
 
         // Add the first sine wave filled with a very transparent white
         let top1: CGFloat = 17.0
-        let wave1 = wavyPath(rect: CGRect(x: 0, y: top1, width: frame.width, height: frame.height - top1), periods: 1.1, amplitude: 08, start: 0.05)
+        let wave1 = wavyPath(rect: CGRect(x: 0, y: top1, width: frame.width, height: frame.height - top1), periods: 1.15, amplitude: 9, start: 4)
         let clear: UIColor = .systemTeal
         clear.set()
 //        UIColor(white: 1, alpha: 0.8).set()

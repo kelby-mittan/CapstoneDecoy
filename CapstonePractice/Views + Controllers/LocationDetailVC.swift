@@ -30,7 +30,7 @@ class LocationDetailVC: UIViewController {
     }
     
     override func loadView() {
-        view = locationView
+        view = waveV
     }
     
     override func viewDidLoad() {
@@ -43,7 +43,7 @@ class LocationDetailVC: UIViewController {
         locationView.seaLevelLineChart.delegate = self
         locationView.populationGraphView.delegate = self
         setupUI()
-        setSeaLevelData()
+//        setSeaLevelData()
     }
     
     private func setupUI() {
@@ -72,8 +72,12 @@ class LocationDetailVC: UIViewController {
         
         print("AR Button Pressed")
         
-        let stickyVC = StickyHeaderController()
-        present(stickyVC, animated: true)
+        setSeaLevelData()
+//        locationView.seaLevelLineChart.animate(xAxisDuration: 4)
+        locationView.seaLevelLineChart.animate(xAxisDuration: 2, yAxisDuration: 3.5, easingOption: .easeInCirc)
+        
+//        let stickyVC = StickyHeaderController()
+//        present(stickyVC, animated: true)
 //        navigationController?.pushViewController(stickyVC, animated: true)
         
         //                isStatusBarHidden.toggle()
@@ -103,6 +107,10 @@ extension LocationDetailVC: UIScrollViewDelegate {
             isStatusBarHidden = false
             animateStatusBar()
         }
+        
+//        if y > 400 {
+//            locationView.seaLevelLineChart.animate(xAxisDuration: 10)
+//        }
         //        let newHeaderViewHeight: CGFloat = locationView.headerViewHeightConstraint.constant - y
         ////
         //        if newHeaderViewHeight > headerViewMaxHeight {
@@ -123,9 +131,20 @@ extension LocationDetailVC: ChartViewDelegate {
     }
     
     func setSeaLevelData() {
-        let set = LineChartDataSet(entries: getSeaLevelData(), label: "Year")
-        
+        let set = LineChartDataSet(entries: getSeaLevelData(), label: "")
+//        let set = LineChartDataSet(entries: getSeaLevelData())
+        set.circleRadius = 3
+        set.drawCirclesEnabled = false
+        set.mode = .cubicBezier
+        set.lineWidth = 3
+        set.setCircleColor(.white)
+        set.setColor(.white)
+        set.fill = Fill(color: .white)
+        set.fillAlpha = 0.7
+        set.drawFilledEnabled = true
+        set.drawHorizontalHighlightIndicatorEnabled = false
         let data = LineChartData(dataSet: set)
+        data.setDrawValues(false)
         locationView.seaLevelLineChart.data = data
     }
     

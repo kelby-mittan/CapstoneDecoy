@@ -102,7 +102,7 @@ class DetailView: UIView {
         let yAxis = lineChart.leftAxis
         yAxis.labelFont = .boldSystemFont(ofSize: 12)
         lineChart.xAxis.labelFont = .boldSystemFont(ofSize: 12)
-        yAxis.setLabelCount(7, force: false)
+        yAxis.setLabelCount(5, force: false)
         yAxis.axisLineColor = .white
         yAxis.labelTextColor = .white
         lineChart.xAxis.labelPosition = .bottom
@@ -110,6 +110,9 @@ class DetailView: UIView {
         lineChart.xAxis.axisLineColor = .white
         yAxis.drawGridLinesEnabled = false
         lineChart.xAxis.drawGridLinesEnabled = false
+        lineChart.xAxis.setLabelCount(5, force: false)
+//        lineChart.animate(xAxisDuration: 10)
+        
         return lineChart
     }()
     
