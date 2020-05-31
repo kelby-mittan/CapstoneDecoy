@@ -113,8 +113,9 @@ class DetailView: UIView {
         yAxis.drawGridLinesEnabled = false
         lineChart.xAxis.drawGridLinesEnabled = false
         lineChart.xAxis.setLabelCount(5, force: false)
+        lineChart.legend.enabled = false
+        lineChart.xAxis.avoidFirstLastClippingEnabled = true
 //        lineChart.animate(xAxisDuration: 10)
-        
         return lineChart
     }()
     

@@ -79,10 +79,6 @@ class LocationDetailVC: UIViewController {
         
         print("AR Button Pressed")
         
-        setSeaLevelData()
-//        locationView.seaLevelLineChart.animate(xAxisDuration: 4)
-        locationView.seaLevelLineChart.animate(xAxisDuration: 2, yAxisDuration: 6.5, easingOption: .easeInCirc)
-        
 //        let stickyVC = StickyHeaderController()
 //        present(stickyVC, animated: true)
 //        navigationController?.pushViewController(stickyVC, animated: true)
@@ -99,7 +95,7 @@ class LocationDetailVC: UIViewController {
             
             setSeaLevelData()
     //        locationView.seaLevelLineChart.animate(xAxisDuration: 4)
-            locationView.seaLevelLineChart.animate(xAxisDuration: 2, yAxisDuration: 3.5, easingOption: .easeInCirc)
+        locationView.seaLevelLineChart.animate(xAxisDuration: 2, yAxisDuration: 6.5, easingOption: .easeInCirc)
         }
 }
 
@@ -158,6 +154,7 @@ extension LocationDetailVC: ChartViewDelegate {
         set.fillAlpha = 0.7
         set.drawFilledEnabled = true
         set.drawHorizontalHighlightIndicatorEnabled = false
+        set.drawVerticalHighlightIndicatorEnabled = false
         let data = LineChartData(dataSet: set)
         data.setDrawValues(false)
         locationView.seaLevelLineChart.data = data
