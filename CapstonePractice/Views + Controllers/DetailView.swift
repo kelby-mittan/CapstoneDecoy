@@ -11,6 +11,16 @@ import Charts
 
 class DetailView: UIView {
     
+    public lazy var backButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        button.backgroundColor = .blue
+        button.tintColor = .white
+        button.contentMode = .scaleToFill
+        button.layer.cornerRadius = 5
+        return button
+    }()
+    
     public lazy var scrollView: UIScrollView = {
         let scrollview = UIScrollView()
         scrollview.backgroundColor = .clear
@@ -84,14 +94,6 @@ class DetailView: UIView {
         label.font = UIFont.monospacedDigitSystemFont(ofSize: 17, weight: .bold)
         return label
     }()
-    
-//    public lazy var seaLevelGraphView: UIView = {
-//        let graphView = UIView()
-//        graphView.backgroundColor = .systemOrange
-//        graphView.layer.cornerRadius = 5
-//        graphView.clipsToBounds = true
-//        return graphView
-//    }()
     
     public lazy var seaLevelLineChart: LineChartView = {
         let lineChart = LineChartView()
@@ -187,7 +189,6 @@ class DetailView: UIView {
         setupLooksLikeConstraints()
         setupLooksLikeContentConstraints()
         graphLabelConstraints()
-//        seaLevelGraphConstraints()
         setupSeaLevelLineChart()
         setupPopulationLabelConstraints()
         populationContentConstraints()
@@ -195,7 +196,7 @@ class DetailView: UIView {
         populationGraphConstraints()
         setupARView()
         arButtonConstraints()
-        
+        backButtonConstraints()
     }
     
     private func scrollViewContraints() {
@@ -308,28 +309,9 @@ class DetailView: UIView {
         ])
     }
     
-//    private func seaLevelGraphConstraints(){
-//        scrollView.addSubview(seaLevelGraphView)
-//        seaLevelGraphView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            seaLevelGraphView.topAnchor.constraint(equalTo: graphLabel.bottomAnchor, constant: 8),
-//            seaLevelGraphView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.25),
-//            seaLevelGraphView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-//            seaLevelGraphView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
-//        ])
-//    }
-    
     private func setupSeaLevelLineChart() {
         scrollView.addSubview(seaLevelLineChart)
         seaLevelLineChart.translatesAutoresizingMaskIntoConstraints = false
-        
-//        NSLayoutConstraint.activate([
-//            seaLevelLineChart.topAnchor.constraint(equalTo: seaLevelGraphView.topAnchor),
-//            seaLevelLineChart.bottomAnchor.constraint(equalTo: seaLevelGraphView.bottomAnchor),
-//            seaLevelLineChart.leadingAnchor.constraint(equalTo: seaLevelGraphView.leadingAnchor),
-//            seaLevelLineChart.trailingAnchor.constraint(equalTo: seaLevelGraphView.trailingAnchor)
-//        ])
         
         NSLayoutConstraint.activate([
             seaLevelLineChart.topAnchor.constraint(equalTo: graphLabel.bottomAnchor, constant: 8),
@@ -391,7 +373,6 @@ class DetailView: UIView {
         arView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            //            goToARButton.topAnchor.constraint(equalTo: populationGraphView.bottomAnchor, constant: 20),
             arView.centerXAnchor.constraint(equalTo: centerXAnchor),
             arView.widthAnchor.constraint(equalTo: widthAnchor),
             arView.heightAnchor.constraint(equalToConstant: 100),
@@ -404,11 +385,22 @@ class DetailView: UIView {
         goToARButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            //            goToARButton.topAnchor.constraint(equalTo: populationGraphView.bottomAnchor, constant: 20),
             goToARButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             goToARButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
             goToARButton.heightAnchor.constraint(equalToConstant: 44),
             goToARButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        ])
+    }
+    
+    private func backButtonConstraints() {
+        addSubview(backButton)
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            backButton.widthAnchor.constraint(equalToConstant: 44),
+            backButton.heightAnchor.constraint(equalToConstant: 44),
+            backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            backButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 40)
         ])
     }
 }

@@ -25,12 +25,16 @@ class LocationDetailVC: UIViewController {
         return self.isStatusBarHidden
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .slide
     }
     
     override func loadView() {
-        view = waveV
+        view = locationView
     }
     
     override func viewDidLoad() {
@@ -39,11 +43,14 @@ class LocationDetailVC: UIViewController {
         view.backgroundColor = .systemTeal
         
         locationView.goToARButton.addTarget(self, action: #selector(goToARButtonPressed(_:)), for: .touchUpInside)
+        locationView.backButton.addTarget(self, action: #selector(backButtonPressed(_:)), for: .touchUpInside)
         locationView.scrollView.delegate = self
         locationView.seaLevelLineChart.delegate = self
         locationView.populationGraphView.delegate = self
         setupUI()
 //        setSeaLevelData()
+        
+        
     }
     
     private func setupUI() {
@@ -74,7 +81,7 @@ class LocationDetailVC: UIViewController {
         
         setSeaLevelData()
 //        locationView.seaLevelLineChart.animate(xAxisDuration: 4)
-        locationView.seaLevelLineChart.animate(xAxisDuration: 2, yAxisDuration: 3.5, easingOption: .easeInCirc)
+        locationView.seaLevelLineChart.animate(xAxisDuration: 2, yAxisDuration: 6.5, easingOption: .easeInCirc)
         
 //        let stickyVC = StickyHeaderController()
 //        present(stickyVC, animated: true)
@@ -85,6 +92,15 @@ class LocationDetailVC: UIViewController {
         //                    self.setNeedsStatusBarAppearanceUpdate()
         //                }
     }
+    
+    @objc func backButtonPressed(_ sender: UIBarButtonItem) {
+            
+            print("Back Button Pressed")
+            
+            setSeaLevelData()
+    //        locationView.seaLevelLineChart.animate(xAxisDuration: 4)
+            locationView.seaLevelLineChart.animate(xAxisDuration: 2, yAxisDuration: 3.5, easingOption: .easeInCirc)
+        }
 }
 
 extension LocationDetailVC: UIScrollViewDelegate {
@@ -92,7 +108,6 @@ extension LocationDetailVC: UIScrollViewDelegate {
     func animateStatusBar() {
         UIView.animate(withDuration: 0.7) {
             self.setNeedsStatusBarAppearanceUpdate()
-            
         }
     }
     
