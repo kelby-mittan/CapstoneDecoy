@@ -47,6 +47,8 @@ class LocationDetailVC: UIViewController {
         let nyc = locations[0]
         locationView.locationLabel.text = nyc.location
         locationView.seaLevelContentLabel.text = nyc.facts.generalFacts
+        locationView.looksLikeContentLabel.text = nyc.facts.seaLevelFacts
+        locationView.populationContentLabel.text = nyc.facts.populationFacts
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,16 +61,6 @@ class LocationDetailVC: UIViewController {
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.title = ""
-        
-        //        self.navigationController?.prefersStatusBarHidden
-        //        if locationView.headerContainerViewBottom == locationView.safeAreaLayoutGuide.topAnchor {
-        //            isStatusBarHidden = true
-        //            UIView.animate(withDuration: 0.7) {
-        //                self.setNeedsStatusBarAppearanceUpdate()
-        //            }
-        //        }
-        
-        
         
     }
     
@@ -98,7 +90,7 @@ extension LocationDetailVC: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let y: CGFloat = scrollView.contentOffset.y
-        print(y)
+//        print(y)
         
         if y > 60 {
             isStatusBarHidden = true
