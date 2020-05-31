@@ -8,6 +8,7 @@ target 'CapstonePractice' do
   # Pods for CapstonePractice
 
 pod 'SnapKit'
+pod 'Charts'
 
   target 'CapstonePracticeTests' do
     inherit! :search_paths

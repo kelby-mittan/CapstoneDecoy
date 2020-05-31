@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Charts
 
 class DetailView: UIView {
     
@@ -84,10 +85,32 @@ class DetailView: UIView {
         return label
     }()
     
-    public lazy var seaLevelGraphView: UIView = {
-        let graphView = UIView()
-        graphView.backgroundColor = .systemOrange
-        return graphView
+//    public lazy var seaLevelGraphView: UIView = {
+//        let graphView = UIView()
+//        graphView.backgroundColor = .systemOrange
+//        graphView.layer.cornerRadius = 5
+//        graphView.clipsToBounds = true
+//        return graphView
+//    }()
+    
+    public lazy var seaLevelLineChart: LineChartView = {
+        let lineChart = LineChartView()
+        lineChart.backgroundColor = .systemBlue
+        lineChart.layer.cornerRadius = 5
+        lineChart.clipsToBounds = true
+        lineChart.rightAxis.enabled = false
+        let yAxis = lineChart.leftAxis
+        yAxis.labelFont = .boldSystemFont(ofSize: 12)
+        lineChart.xAxis.labelFont = .boldSystemFont(ofSize: 12)
+        yAxis.setLabelCount(7, force: false)
+        yAxis.axisLineColor = .white
+        yAxis.labelTextColor = .white
+        lineChart.xAxis.labelPosition = .bottom
+        lineChart.xAxis.labelTextColor = .white
+        lineChart.xAxis.axisLineColor = .white
+        yAxis.drawGridLinesEnabled = false
+        lineChart.xAxis.drawGridLinesEnabled = false
+        return lineChart
     }()
     
     public lazy var populationFactsLabel: UILabel = {
@@ -116,10 +139,12 @@ class DetailView: UIView {
         return label
     }()
     
-    public lazy var populationGraphView: UIView = {
-        let graphView = UIView()
-        graphView.backgroundColor = .systemOrange
-        return graphView
+    public lazy var populationGraphView: LineChartView = {
+        let lineChart = LineChartView()
+        lineChart.backgroundColor = .green
+        lineChart.layer.cornerRadius = 5
+        lineChart.clipsToBounds = true
+        return lineChart
     }()
     
     public lazy var goToARButton: UIButton = {
@@ -159,7 +184,8 @@ class DetailView: UIView {
         setupLooksLikeConstraints()
         setupLooksLikeContentConstraints()
         graphLabelConstraints()
-        seaLevelGraphConstraints()
+//        seaLevelGraphConstraints()
+        setupSeaLevelLineChart()
         setupPopulationLabelConstraints()
         populationContentConstraints()
         populationGraphLabelConstraints()
@@ -199,7 +225,7 @@ class DetailView: UIView {
         
         headerContainerView.addSubview(locationImage)
         locationImage.translatesAutoresizingMaskIntoConstraints = false
-                
+        
         NSLayoutConstraint.activate([
             locationImage.topAnchor.constraint(equalTo: headerContainerView.topAnchor),
             locationImage.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -279,15 +305,34 @@ class DetailView: UIView {
         ])
     }
     
-    private func seaLevelGraphConstraints(){
-        scrollView.addSubview(seaLevelGraphView)
-        seaLevelGraphView.translatesAutoresizingMaskIntoConstraints = false
+//    private func seaLevelGraphConstraints(){
+//        scrollView.addSubview(seaLevelGraphView)
+//        seaLevelGraphView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.activate([
+//            seaLevelGraphView.topAnchor.constraint(equalTo: graphLabel.bottomAnchor, constant: 8),
+//            seaLevelGraphView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.25),
+//            seaLevelGraphView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+//            seaLevelGraphView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+//        ])
+//    }
+    
+    private func setupSeaLevelLineChart() {
+        scrollView.addSubview(seaLevelLineChart)
+        seaLevelLineChart.translatesAutoresizingMaskIntoConstraints = false
+        
+//        NSLayoutConstraint.activate([
+//            seaLevelLineChart.topAnchor.constraint(equalTo: seaLevelGraphView.topAnchor),
+//            seaLevelLineChart.bottomAnchor.constraint(equalTo: seaLevelGraphView.bottomAnchor),
+//            seaLevelLineChart.leadingAnchor.constraint(equalTo: seaLevelGraphView.leadingAnchor),
+//            seaLevelLineChart.trailingAnchor.constraint(equalTo: seaLevelGraphView.trailingAnchor)
+//        ])
         
         NSLayoutConstraint.activate([
-            seaLevelGraphView.topAnchor.constraint(equalTo: graphLabel.bottomAnchor, constant: 8),
-            seaLevelGraphView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.25),
-            seaLevelGraphView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            seaLevelGraphView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            seaLevelLineChart.topAnchor.constraint(equalTo: graphLabel.bottomAnchor, constant: 8),
+            seaLevelLineChart.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.25),
+            seaLevelLineChart.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            seaLevelLineChart.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
     }
     
@@ -296,7 +341,7 @@ class DetailView: UIView {
         populationFactsLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            populationFactsLabel.topAnchor.constraint(equalTo: seaLevelGraphView.bottomAnchor, constant: 20),
+            populationFactsLabel.topAnchor.constraint(equalTo: seaLevelLineChart.bottomAnchor, constant: 20),
             populationFactsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             populationFactsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
             

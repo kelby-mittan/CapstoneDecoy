@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Charts
 
 class LocationDetailVC: UIViewController {
     
@@ -39,8 +40,10 @@ class LocationDetailVC: UIViewController {
         
         locationView.goToARButton.addTarget(self, action: #selector(goToARButtonPressed(_:)), for: .touchUpInside)
         locationView.scrollView.delegate = self
-        
+        locationView.seaLevelLineChart.delegate = self
+        locationView.populationGraphView.delegate = self
         setupUI()
+        setSeaLevelData()
     }
     
     private func setupUI() {
@@ -71,6 +74,7 @@ class LocationDetailVC: UIViewController {
         
         let stickyVC = StickyHeaderController()
         present(stickyVC, animated: true)
+//        navigationController?.pushViewController(stickyVC, animated: true)
         
         //                isStatusBarHidden.toggle()
         //                UIView.animate(withDuration: 0.7) {
@@ -111,4 +115,27 @@ extension LocationDetailVC: UIScrollViewDelegate {
         //        }
     }
     
+}
+
+extension LocationDetailVC: ChartViewDelegate {
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        print(entry)
+    }
+    
+    func setSeaLevelData() {
+        let set = LineChartDataSet(entries: getSeaLevelData(), label: "Year")
+        
+        let data = LineChartData(dataSet: set)
+        locationView.seaLevelLineChart.data = data
+    }
+    
+    func getSeaLevelData() -> [ChartDataEntry] {
+        var dataEntry: [ChartDataEntry] = []
+        
+        for data in locations[0].dataSet {
+            let entry = ChartDataEntry(x: Double(data.year), y: data.level)
+            dataEntry.append(entry)
+        }
+        return dataEntry
+    }
 }
