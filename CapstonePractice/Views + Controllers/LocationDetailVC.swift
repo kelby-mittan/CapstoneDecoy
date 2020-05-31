@@ -37,12 +37,16 @@ class LocationDetailVC: UIViewController {
         
         view.backgroundColor = .systemTeal
         
-        
-        //        navigationController?.navigationBar.prefersLargeTitles = true
-        
         locationView.goToARButton.addTarget(self, action: #selector(goToARButtonPressed(_:)), for: .touchUpInside)
         locationView.scrollView.delegate = self
         
+        setupUI()
+    }
+    
+    private func setupUI() {
+        let nyc = locations[0]
+        locationView.locationLabel.text = nyc.location
+        locationView.seaLevelContentLabel.text = nyc.facts.generalFacts
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -142,12 +142,9 @@ class DetailView: UIView {
     
     private func commonInit() {
         scrollViewContraints()
-        //        contentViewContraints()
-        
         setupSeaLevelLabelConstraints()
         headerContainer()
         setupLocationImageConstraints()
-        
         setupLocationLabel()
         seaLevelFactsConstraints()
         graphLabelConstraints()
@@ -172,24 +169,6 @@ class DetailView: UIView {
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
-    
-    //    private func contentViewContraints() {
-    //        scrollView.addSubview(contentView)
-    //        contentView.translatesAutoresizingMaskIntoConstraints = false
-    //
-    //        let heightConstraint = contentView.heightAnchor.constraint(equalTo: self.heightAnchor)
-    //        heightConstraint.priority = UILayoutPriority(250)
-    //
-    //        NSLayoutConstraint.activate([
-    //
-    //            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-    //            heightConstraint,
-    //            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-    //            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-    //            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-    //            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
-    //        ])
-    //    }
     
     private func headerContainer() {
         self.scrollView.addSubview(headerContainerView)
@@ -252,7 +231,7 @@ class DetailView: UIView {
         seaLevelContentLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            seaLevelContentLabel.topAnchor.constraint(equalTo: seaLevelFactsLabel.bottomAnchor, constant: 20),
+            seaLevelContentLabel.topAnchor.constraint(equalTo: seaLevelFactsLabel.bottomAnchor, constant: 10),
             seaLevelContentLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             seaLevelContentLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
