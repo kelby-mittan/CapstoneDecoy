@@ -42,12 +42,18 @@ class DetailView: UIView {
         return iv
     }()
     
+    public lazy var wView: WavyView = {
+        let wavy = WavyView()
+        wavy.backgroundColor = .clear
+        return wavy
+    }()
+    
     public lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.text = "New York City"
         label.numberOfLines = 0
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.font = UIFont.boldSystemFont(ofSize: 35)
         label.textColor = .white
         return label
     }()
@@ -115,7 +121,6 @@ class DetailView: UIView {
         lineChart.xAxis.setLabelCount(5, force: false)
         lineChart.legend.enabled = false
         lineChart.xAxis.avoidFirstLastClippingEnabled = true
-//        lineChart.animate(xAxisDuration: 10)
         return lineChart
     }()
     
@@ -185,6 +190,7 @@ class DetailView: UIView {
         setupSeaLevelLabelConstraints()
         headerContainer()
         setupLocationImageConstraints()
+        setupWaveView()
         setupLocationLabel()
         seaLevelFactsConstraints()
         setupLooksLikeConstraints()
@@ -241,6 +247,18 @@ class DetailView: UIView {
         imageViewTopConstraint = self.locationImage.topAnchor.constraint(equalTo: self.scrollView.topAnchor)
         imageViewTopConstraint.priority = UILayoutPriority(rawValue: 900)
         imageViewTopConstraint.isActive = true
+    }
+    
+    private func setupWaveView() {
+        headerContainerView.addSubview(wView)
+        wView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            wView.centerXAnchor.constraint(equalTo: locationImage.centerXAnchor),
+            wView.topAnchor.constraint(equalTo: locationImage.topAnchor),
+            wView.widthAnchor.constraint(equalTo: locationImage.widthAnchor),
+            wView.heightAnchor.constraint(equalTo: locationImage.heightAnchor)
+        ])
     }
     
     private func setupLocationLabel() {
