@@ -14,7 +14,7 @@ class DetailView: UIView {
     public lazy var backButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        button.backgroundColor = .blue
+        button.backgroundColor = .clear
         button.tintColor = .white
         button.contentMode = .scaleToFill
         button.layer.cornerRadius = 5
@@ -168,12 +168,19 @@ class DetailView: UIView {
     
     public lazy var arView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemTeal
+        view.backgroundColor = .clear
         return view
     }()
     
-    var headerContainerViewBottom : NSLayoutConstraint!
-    var imageViewTopConstraint: NSLayoutConstraint!
+    public lazy var triggerView1: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    public var headerContainerViewBottom : NSLayoutConstraint!
+    public var imageViewTopConstraint: NSLayoutConstraint!
+    public var seaLevelGraphBottomConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -204,6 +211,7 @@ class DetailView: UIView {
         setupARView()
         arButtonConstraints()
         backButtonConstraints()
+        setupTriggerView()
     }
     
     private func scrollViewContraints() {
@@ -282,6 +290,8 @@ class DetailView: UIView {
             seaLevelFactsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
             
         ])
+        
+        
     }
     
     private func seaLevelFactsConstraints() {
@@ -326,6 +336,8 @@ class DetailView: UIView {
             graphLabel.leadingAnchor.constraint(equalTo: looksLikeContentLabel.leadingAnchor),
             graphLabel.trailingAnchor.constraint(equalTo: looksLikeContentLabel.trailingAnchor)
         ])
+        
+        
     }
     
     private func setupSeaLevelLineChart() {
@@ -338,6 +350,11 @@ class DetailView: UIView {
             seaLevelLineChart.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             seaLevelLineChart.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
+        
+        seaLevelGraphBottomConstraint = seaLevelLineChart.bottomAnchor.constraint(equalTo: arView.topAnchor)
+        
+        
+//        seaLevelGraphBottomConstraint.isActive = true
     }
     
     private func setupPopulationLabelConstraints() {
@@ -420,6 +437,18 @@ class DetailView: UIView {
             backButton.heightAnchor.constraint(equalToConstant: 44),
             backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             backButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 40)
+        ])
+    }
+    
+    private func setupTriggerView() {
+        scrollView.addSubview(triggerView1)
+        triggerView1.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            triggerView1.centerXAnchor.constraint(equalTo: centerXAnchor),
+            triggerView1.widthAnchor.constraint(equalTo: widthAnchor),
+            triggerView1.topAnchor.constraint(equalTo: self.topAnchor),
+            triggerView1.bottomAnchor.constraint(equalTo: seaLevelLineChart.bottomAnchor)
         ])
     }
 }

@@ -24,7 +24,7 @@ class WavyView: UIView {
         
         // Add the first sine wave filled with a very transparent white
         let top1: CGFloat = 17.0
-        let wave1 = wavyPath(rect: CGRect(x: 0, y: top1, width: frame.width, height: frame.height - top1), periods: 0.75, amplitude: 15, start: 0)
+        let wave1 = wavyPath(rect: CGRect(x: 0, y: top1, width: frame.width, height: frame.height - top1), periods: 1.15, amplitude: 15, start: 0)
 //        let wave1 = wavyPath(rect: CGRect(x: 0, y: top1, width: frame.width, height: frame.height - top1), periods: 0.75, amplitude: 20, start: -5)
         let clear: UIColor = .systemTeal
         clear.set()
@@ -76,7 +76,7 @@ class Wave: UIView {
     
     public lazy var wView: WavyView = {
         let wavy = WavyView()
-        wavy.backgroundColor = .clear
+        wavy.backgroundColor = .white
         return wavy
     }()
     
@@ -109,9 +109,9 @@ class Wave: UIView {
     }
     
     private func commonInit() {        
-        setupImageView()
+//        setupImageView()
         setupWaveView()
-        setupLocationLabel()
+//        setupLocationLabel()
     }
     
     private func setupWaveView() {
@@ -119,10 +119,10 @@ class Wave: UIView {
         wView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            wView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
-            wView.topAnchor.constraint(equalTo: imageView.topAnchor),
-            wView.widthAnchor.constraint(equalTo: imageView.widthAnchor),
-            wView.heightAnchor.constraint(equalTo: imageView.heightAnchor)
+            wView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            wView.topAnchor.constraint(equalTo: self.topAnchor),
+            wView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1),
+            wView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3)
         ])
     }
     

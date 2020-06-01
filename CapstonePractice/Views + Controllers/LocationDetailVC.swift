@@ -48,7 +48,7 @@ class LocationDetailVC: UIViewController {
         locationView.seaLevelLineChart.delegate = self
         locationView.populationGraphView.delegate = self
         setupUI()
-//        setSeaLevelData()
+        //        setSeaLevelData()
         
         
     }
@@ -79,9 +79,9 @@ class LocationDetailVC: UIViewController {
         
         print("AR Button Pressed")
         
-//        let stickyVC = StickyHeaderController()
-//        present(stickyVC, animated: true)
-//        navigationController?.pushViewController(stickyVC, animated: true)
+        //        let stickyVC = StickyHeaderController()
+        //        present(stickyVC, animated: true)
+        //        navigationController?.pushViewController(stickyVC, animated: true)
         
         //                isStatusBarHidden.toggle()
         //                UIView.animate(withDuration: 0.7) {
@@ -90,13 +90,14 @@ class LocationDetailVC: UIViewController {
     }
     
     @objc func backButtonPressed(_ sender: UIBarButtonItem) {
-            
-            print("Back Button Pressed")
-            
-            setSeaLevelData()
-    //        locationView.seaLevelLineChart.animate(xAxisDuration: 4)
-        locationView.seaLevelLineChart.animate(xAxisDuration: 2, yAxisDuration: 6.5, easingOption: .easeInCirc)
-        }
+        
+        print("Back Button Pressed")
+        
+        setSeaLevelData()
+        //        locationView.seaLevelLineChart.animate(xAxisDuration: 4)
+        //        locationView.seaLevelLineChart.animate(xAxisDuration: 2, yAxisDuration: 6.5, easingOption: .easeInCirc)
+        locationView.seaLevelLineChart.animate(xAxisDuration: 10)
+    }
 }
 
 extension LocationDetailVC: UIScrollViewDelegate {
@@ -108,8 +109,12 @@ extension LocationDetailVC: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        
         let y: CGFloat = scrollView.contentOffset.y
-//        print(y)
+        //        print(y)
+
+//        print(locationView.triggerView1.frame.height)
         
         if y > 60 {
             isStatusBarHidden = true
@@ -119,9 +124,20 @@ extension LocationDetailVC: UIScrollViewDelegate {
             animateStatusBar()
         }
         
-//        if y > 400 {
-//            locationView.seaLevelLineChart.animate(xAxisDuration: 10)
-//        }
+        if scrollView.bounds.contains(locationView.seaLevelLineChart.bounds) {
+            print("iiiiiiiii")
+        }
+        
+        let triggerSeaLevelHeight = (locationView.frame.height - y) * 2
+        //        print(triggerSeaLevelHeight)
+        //        print(y)
+        //        print(locationView.seaLevelGraphBottomConstraint.constant)
+        
+        if y > triggerSeaLevelHeight && y < triggerSeaLevelHeight + 20 {
+            //            setSeaLevelData()
+            //            locationView.seaLevelLineChart.animate(xAxisDuration: 5)
+        }
+        
         //        let newHeaderViewHeight: CGFloat = locationView.headerViewHeightConstraint.constant - y
         ////
         //        if newHeaderViewHeight > headerViewMaxHeight {
@@ -134,6 +150,7 @@ extension LocationDetailVC: UIScrollViewDelegate {
         //        }
     }
     
+    
 }
 
 extension LocationDetailVC: ChartViewDelegate {
@@ -143,7 +160,7 @@ extension LocationDetailVC: ChartViewDelegate {
     
     func setSeaLevelData() {
         let set = LineChartDataSet(entries: getSeaLevelData(), label: "")
-//        let set = LineChartDataSet(entries: getSeaLevelData())
+        //        let set = LineChartDataSet(entries: getSeaLevelData())
         set.circleRadius = 3
         set.drawCirclesEnabled = false
         set.mode = .cubicBezier
@@ -151,7 +168,7 @@ extension LocationDetailVC: ChartViewDelegate {
         set.setCircleColor(.white)
         set.setColor(.white)
         set.fill = Fill(color: .white)
-        set.fillAlpha = 0.7
+        set.fillAlpha = 0.6
         set.drawFilledEnabled = true
         set.drawHorizontalHighlightIndicatorEnabled = false
         set.drawVerticalHighlightIndicatorEnabled = false
