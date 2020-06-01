@@ -13,7 +13,7 @@ class DetailView: UIView {
     
     public lazy var backButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         button.backgroundColor = .clear
         button.tintColor = .white
         button.contentMode = .scaleToFill
@@ -160,9 +160,17 @@ class DetailView: UIView {
     
     public lazy var goToARButton: UIButton = {
         let button = UIButton()
-        button.setTitle("AR Experience", for: .normal)
-        button.backgroundColor = .systemPurple
-        button.layer.cornerRadius = 5
+//        button.setTitle("AR Experience", for: .normal)
+//        button.backgroundColor = .systemPurple
+//        button.layer.cornerRadius = 5
+        button.frame = CGRect(x: 100, y: 100, width: 70, height: 70)
+        button.layer.cornerRadius = 0.5 * button.bounds.size.width
+        button.clipsToBounds = true
+        button.setImage(UIImage(named:"ar2"), for: .normal)
+        button.backgroundColor = .green
+        button.tintColor = .white
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.systemGray.cgColor
         return button
     }()
     
@@ -172,7 +180,13 @@ class DetailView: UIView {
         return view
     }()
     
-    public lazy var triggerView1: UIView = {
+    public lazy var triggerSLView1: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    public lazy var triggerSLView2: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
@@ -422,8 +436,8 @@ class DetailView: UIView {
         
         NSLayoutConstraint.activate([
             goToARButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            goToARButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
-            goToARButton.heightAnchor.constraint(equalToConstant: 44),
+            goToARButton.widthAnchor.constraint(equalToConstant: 70),
+            goToARButton.heightAnchor.constraint(equalToConstant: 70),
             goToARButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
     }
@@ -441,14 +455,19 @@ class DetailView: UIView {
     }
     
     private func setupTriggerView() {
-        scrollView.addSubview(triggerView1)
-        triggerView1.translatesAutoresizingMaskIntoConstraints = false
-        
+        scrollView.addSubview(triggerSLView1)
+        scrollView.addSubview(triggerSLView2)
+        triggerSLView1.translatesAutoresizingMaskIntoConstraints = false
+        triggerSLView2.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            triggerView1.centerXAnchor.constraint(equalTo: centerXAnchor),
-            triggerView1.widthAnchor.constraint(equalTo: widthAnchor),
-            triggerView1.topAnchor.constraint(equalTo: self.topAnchor),
-            triggerView1.bottomAnchor.constraint(equalTo: seaLevelLineChart.bottomAnchor)
+            triggerSLView1.centerXAnchor.constraint(equalTo: centerXAnchor),
+            triggerSLView1.widthAnchor.constraint(equalTo: widthAnchor),
+            triggerSLView1.topAnchor.constraint(equalTo: self.topAnchor),
+            triggerSLView1.bottomAnchor.constraint(equalTo: seaLevelLineChart.bottomAnchor),
+            triggerSLView2.centerXAnchor.constraint(equalTo: centerXAnchor),
+            triggerSLView2.widthAnchor.constraint(equalTo: widthAnchor),
+            triggerSLView2.topAnchor.constraint(equalTo: self.topAnchor),
+            triggerSLView2.bottomAnchor.constraint(equalTo: goToARButton.topAnchor)
         ])
     }
 }

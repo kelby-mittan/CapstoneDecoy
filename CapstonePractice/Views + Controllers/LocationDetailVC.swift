@@ -114,7 +114,7 @@ extension LocationDetailVC: UIScrollViewDelegate {
         let y: CGFloat = scrollView.contentOffset.y
         //        print(y)
 
-//        print(locationView.triggerView1.frame.height)
+        print(locationView.triggerSLView2.frame.height - locationView.triggerSLView1.frame.height)
         
         if y > 60 {
             isStatusBarHidden = true
@@ -124,19 +124,7 @@ extension LocationDetailVC: UIScrollViewDelegate {
             animateStatusBar()
         }
         
-        if scrollView.bounds.contains(locationView.seaLevelLineChart.bounds) {
-            print("iiiiiiiii")
-        }
-        
-        let triggerSeaLevelHeight = (locationView.frame.height - y) * 2
-        //        print(triggerSeaLevelHeight)
-        //        print(y)
-        //        print(locationView.seaLevelGraphBottomConstraint.constant)
-        
-        if y > triggerSeaLevelHeight && y < triggerSeaLevelHeight + 20 {
-            //            setSeaLevelData()
-            //            locationView.seaLevelLineChart.animate(xAxisDuration: 5)
-        }
+        triggerGraphAnimation()
         
         //        let newHeaderViewHeight: CGFloat = locationView.headerViewHeightConstraint.constant - y
         ////
@@ -150,6 +138,13 @@ extension LocationDetailVC: UIScrollViewDelegate {
         //        }
     }
     
+    func triggerGraphAnimation() {
+        let triggerHeight = locationView.triggerSLView2.frame.height - locationView.triggerSLView1.frame.height
+        if triggerHeight > 10 && triggerHeight < 30 {
+            setSeaLevelData()
+            locationView.seaLevelLineChart.animate(xAxisDuration: 2, yAxisDuration: 6.5, easingOption: .easeInCirc)
+        }
+    }
     
 }
 
