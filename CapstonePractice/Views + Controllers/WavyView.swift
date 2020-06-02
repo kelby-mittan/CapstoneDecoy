@@ -17,20 +17,35 @@ class WavyView: UIView {
         return nil
     }
     
+//    override func draw(_ rect: CGRect) {
+//        UIColor(red: 0, green: 0, blue: 0, alpha: 0).set()
+//        let bg = UIBezierPath(rect: rect)
+//        bg.fill()
+//
+//        // Add the first sine wave filled with a very transparent white
+//        let top1: CGFloat = 17.0
+//        let wave1 = wavyPath(rect: CGRect(x: 0, y: top1, width: frame.width, height: frame.height - top1), periods: 0.75, amplitude: 10, start: 0)
+////        let wave1 = wavyPath(rect: CGRect(x: 0, y: top1, width: frame.width, height: frame.height - top1), periods: 0.75, amplitude: 20, start: -5)
+//        let clear: UIColor = .systemTeal
+//        clear.set()
+//        wave1.fill()
+//
+//    }
+    
     override func draw(_ rect: CGRect) {
-        UIColor(red: 0, green: 0, blue: 0, alpha: 0).set()
-        let bg = UIBezierPath(rect: rect)
-        bg.fill()
-        
-        // Add the first sine wave filled with a very transparent white
-        let top1: CGFloat = 17.0
-        let wave1 = wavyPath(rect: CGRect(x: 0, y: top1, width: frame.width, height: frame.height - top1), periods: 0.75, amplitude: 10, start: 0)
-//        let wave1 = wavyPath(rect: CGRect(x: 0, y: top1, width: frame.width, height: frame.height - top1), periods: 0.75, amplitude: 20, start: -5)
-        let clear: UIColor = .systemTeal
-        clear.set()
-        wave1.fill()
-        
-    }
+            UIColor(red: 0, green: 0, blue: 0, alpha: 0).set()
+            let bg = UIBezierPath(rect: rect)
+            bg.fill()
+            
+            // Add the first sine wave filled with a very transparent white
+            let top1: CGFloat = 17.0
+            let wave1 = wavyPath(rect: CGRect(x: 0, y: top1, width: frame.width, height: frame.height - top1), periods: 0.75, amplitude: 10, start: 0)
+    //        let wave1 = wavyPath(rect: CGRect(x: 0, y: top1, width: frame.width, height: frame.height - top1), periods: 0.75, amplitude: 20, start: -5)
+            let clear: UIColor = .systemTeal
+            clear.set()
+            wave1.fill()
+            
+        }
     
     // This creates the desired sine wave bezier path
     // rect is the area to fill with the sine wave
@@ -69,6 +84,39 @@ class WavyView: UIView {
         
         return path
     }
+    
+    func wavyPath2(rect: CGRect, periods: Double, amplitude: Double, start: Double) -> UIBezierPath {
+        let path = UIBezierPath()
+        
+        // start in the bottom left corner
+        path.move(to: CGPoint(x: rect.minX, y: rect.maxY))
+        
+        let radsPerPoint = Double(rect.width) / periods / 2.0 / Double.pi
+        let radOffset = start * 2 * Double.pi
+        let xOffset = Double(rect.minX)
+        let yOffset = Double(rect.maxY) - amplitude
+        // This loops through the width of the frame and calculates and draws each point along the size wave
+        // Adjust the "by" value as needed. A smaller value gives smoother curve but takes longer to draw. A larger value is quicker but gives a rougher curve.
+        for x in stride(from: 0, to: Double(rect.width), by: 6) {
+            let rad = Double(x) / radsPerPoint + radOffset
+            let y = sin(rad) * amplitude
+            
+            path.addLine(to: CGPoint(x: x + xOffset, y: y + yOffset))
+        }
+        
+        // Add the last point on the sine wave at the right edge
+        let rad = Double(rect.width) / radsPerPoint + radOffset
+        let y = sin(rad) * amplitude
+        
+        path.addLine(to: CGPoint(x: Double(rect.maxX), y: y + yOffset))
+        
+        // Add line from the end of the sine wave to the bottom right corner
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        // Close the path
+        path.close()
+        
+        return path
+    }
 }
 
 class Wave: UIView {
@@ -76,6 +124,7 @@ class Wave: UIView {
     
     public lazy var wView: WavyView = {
         let wavy = WavyView()
+//        let wV2 = WavyView(
         wavy.backgroundColor = .white
         return wavy
     }()

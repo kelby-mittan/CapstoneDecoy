@@ -36,7 +36,7 @@ class DetailView: UIView {
     public lazy var locationImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        iv.image = UIImage(named: "nycSeaLevel1")
+        iv.image = UIImage(named: "nycSeaLevel2")
         iv.clipsToBounds = true
         iv.alpha = 1
         return iv
@@ -150,35 +150,45 @@ class DetailView: UIView {
         return label
     }()
     
-    public lazy var populationGraphView: LineChartView = {
-        let lineChart = LineChartView()
-        lineChart.backgroundColor = .green
-        lineChart.layer.cornerRadius = 5
-        lineChart.clipsToBounds = true
-        return lineChart
+    public lazy var populationGraphView: PieChartView = {
+        let pieChart = PieChartView()
+        pieChart.backgroundColor = .systemTeal
+        pieChart.layer.cornerRadius = 5
+        pieChart.clipsToBounds = true
+        pieChart.chartDescription?.enabled = false
+        pieChart.drawHoleEnabled = false
+        pieChart.rotationAngle = 0
+        pieChart.rotationEnabled = false
+//        pieChart.isUserInteractionEnabled = false
+        pieChart.legend.enabled = true
+        
+        return pieChart
     }()
     
     public lazy var goToARButton: UIButton = {
         let button = UIButton()
-//        button.setTitle("AR Experience", for: .normal)
-//        button.backgroundColor = .systemPurple
-//        button.layer.cornerRadius = 5
-        button.frame = CGRect(x: 100, y: 100, width: 70, height: 70)
+        button.frame = CGRect(x: 100, y: 100, width: 64, height: 64)
         button.layer.cornerRadius = 0.5 * button.bounds.size.width
         button.clipsToBounds = true
-        button.setImage(UIImage(named:"ar2"), for: .normal)
+        button.setBackgroundImage(UIImage(named:"ar4"), for: .normal)
         button.backgroundColor = .green
+        button.contentMode = .scaleAspectFit
         button.tintColor = .white
         button.layer.borderWidth = 3
         button.layer.borderColor = UIColor.systemGray.cgColor
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 5, height: 5)
+        button.layer.shadowRadius = 4
+        button.layer.shadowOpacity = 0.7
+        button.layer.masksToBounds = false
         return button
     }()
     
-    public lazy var arView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
+//    public lazy var arView: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = .clear
+//        return view
+//    }()
     
     public lazy var triggerSLView1: UIView = {
         let view = UIView()
@@ -194,7 +204,8 @@ class DetailView: UIView {
     
     public var headerContainerViewBottom : NSLayoutConstraint!
     public var imageViewTopConstraint: NSLayoutConstraint!
-    public var seaLevelGraphBottomConstraint: NSLayoutConstraint!
+    public var imageHeightConstraint: NSLayoutConstraint!
+    public var scrollViewTopConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -222,7 +233,6 @@ class DetailView: UIView {
         populationContentConstraints()
         populationGraphLabelConstraints()
         populationGraphConstraints()
-        setupARView()
         arButtonConstraints()
         backButtonConstraints()
         setupTriggerView()
@@ -233,16 +243,20 @@ class DetailView: UIView {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+        
+        scrollViewTopConstraint = scrollView.topAnchor.constraint(equalTo: self.topAnchor)
+        scrollViewTopConstraint.isActive = true
     }
     
     private func headerContainer() {
         self.scrollView.addSubview(headerContainerView)
         
+        headerContainerView.backgroundColor = .white
         self.headerContainerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             headerContainerView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -262,9 +276,11 @@ class DetailView: UIView {
         NSLayoutConstraint.activate([
             locationImage.topAnchor.constraint(equalTo: headerContainerView.topAnchor),
             locationImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            locationImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            locationImage.bottomAnchor.constraint(equalTo: seaLevelFactsLabel.topAnchor, constant: -20)
+            locationImage.trailingAnchor.constraint(equalTo: trailingAnchor)
+//            locationImage.bottomAnchor.constraint(equalTo: seaLevelFactsLabel.topAnchor, constant: -20)
         ])
+        imageHeightConstraint = locationImage.bottomAnchor.constraint(equalTo: seaLevelFactsLabel.topAnchor, constant: -20)
+        imageHeightConstraint.isActive = true
         
         imageViewTopConstraint = self.locationImage.topAnchor.constraint(equalTo: self.scrollView.topAnchor)
         imageViewTopConstraint.priority = UILayoutPriority(rawValue: 900)
@@ -365,10 +381,6 @@ class DetailView: UIView {
             seaLevelLineChart.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
         
-        seaLevelGraphBottomConstraint = seaLevelLineChart.bottomAnchor.constraint(equalTo: arView.topAnchor)
-        
-        
-//        seaLevelGraphBottomConstraint.isActive = true
     }
     
     private func setupPopulationLabelConstraints() {
@@ -411,22 +423,10 @@ class DetailView: UIView {
         
         NSLayoutConstraint.activate([
             populationGraphView.topAnchor.constraint(equalTo: populationGraphLabel.bottomAnchor, constant: 8),
-            populationGraphView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.25),
             populationGraphView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             populationGraphView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            populationGraphView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -80)
-        ])
-    }
-    
-    private func setupARView() {
-        addSubview(arView)
-        arView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            arView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            arView.widthAnchor.constraint(equalTo: widthAnchor),
-            arView.heightAnchor.constraint(equalToConstant: 100),
-            arView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            populationGraphView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -80),
+            populationGraphView.heightAnchor.constraint(equalTo: populationGraphView.widthAnchor)
         ])
     }
     
@@ -435,10 +435,10 @@ class DetailView: UIView {
         goToARButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            goToARButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            goToARButton.widthAnchor.constraint(equalToConstant: 70),
-            goToARButton.heightAnchor.constraint(equalToConstant: 70),
-            goToARButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0)
+            goToARButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            goToARButton.widthAnchor.constraint(equalToConstant: 64),
+            goToARButton.heightAnchor.constraint(equalToConstant: 64),
+            goToARButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 15)
         ])
     }
     

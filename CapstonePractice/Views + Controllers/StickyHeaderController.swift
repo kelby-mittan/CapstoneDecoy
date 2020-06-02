@@ -43,7 +43,7 @@ class StickyHeaderController: UIViewController {
         return v
     }()
     
-    private let headerViewMaxHeight: CGFloat = 400
+    private let headerViewMaxHeight: CGFloat = 250
     
     private lazy var headerViewMinHeight: CGFloat = 44 + (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0)
     

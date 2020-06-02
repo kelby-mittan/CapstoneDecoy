@@ -13,6 +13,7 @@
 		028585742482E0720003E31A /* locationFactsData.json in Resources */ = {isa = PBXBuildFile; fileRef = 028585732482E0720003E31A /* locationFactsData.json */; };
 		028585762482F1B20003E31A /* FactsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028585752482F1B20003E31A /* FactsData.swift */; };
 		0285857D24848B430003E31A /* BezierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0285857C24848B430003E31A /* BezierView.swift */; };
+		028585812485A8940003E31A /* NSUIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028585802485A8940003E31A /* NSUIColor+Hex.swift */; };
 		02ECF51C247AF2E90008915E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ECF51B247AF2E90008915E /* AppDelegate.swift */; };
 		02ECF51E247AF2EA0008915E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ECF51D247AF2EA0008915E /* SceneDelegate.swift */; };
 		02ECF525247AF2F20008915E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02ECF524247AF2F20008915E /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 		028585732482E0720003E31A /* locationFactsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = locationFactsData.json; sourceTree = SOURCE_ROOT; };
 		028585752482F1B20003E31A /* FactsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsData.swift; sourceTree = "<group>"; };
 		0285857C24848B430003E31A /* BezierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierView.swift; sourceTree = "<group>"; };
+		028585802485A8940003E31A /* NSUIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUIColor+Hex.swift"; sourceTree = "<group>"; };
 		02ECF518247AF2E90008915E /* CapstonePractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstonePractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02ECF51B247AF2E90008915E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02ECF51D247AF2EA0008915E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				0285856A2481D5480003E31A /* DetailView.swift */,
 				0285856C2481E0E30003E31A /* WavyView.swift */,
 				0285857C24848B430003E31A /* BezierView.swift */,
+				028585802485A8940003E31A /* NSUIColor+Hex.swift */,
 			);
 			path = "Views + Controllers";
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				02ECF51E247AF2EA0008915E /* SceneDelegate.swift in Sources */,
 				028585762482F1B20003E31A /* FactsData.swift in Sources */,
 				028585692481A0240003E31A /* StickyHeaderController.swift in Sources */,
+				028585812485A8940003E31A /* NSUIColor+Hex.swift in Sources */,
 				02ECF53E247AF4100008915E /* LocationDetailVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
